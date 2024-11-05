@@ -27,7 +27,7 @@ COPY default.conf /etc/nginx/conf.d/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Install MySQL 5.6 client
-RUN apt-get update && apt-get install -y mysql-client
+RUN apt-get update && apt-get install -y default-mysql-client
 
 # Set up working directory
 WORKDIR /var/www/html
