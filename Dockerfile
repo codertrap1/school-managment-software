@@ -26,11 +26,7 @@ RUN wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
 COPY default.conf /etc/nginx/conf.d/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# Install MySQL 5.6 client
-RUN apt-get update && apt-get install -y default-mysql-client
 
-# Set up working directory
-WORKDIR /var/www/html
 
 # Expose the necessary ports
 EXPOSE 3003
