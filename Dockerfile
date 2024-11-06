@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     wget \
-    default-mysql-client \
-    supervisor \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd mbstring zip pdo pdo_mysql
 
@@ -28,14 +26,14 @@ RUN wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
 COPY default.conf /etc/nginx/conf.d/
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# Supervisor configuration
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Install MySQL 5.6 client
+RUN apt-get update && apt-get install -y default-mysql-client
 
 # Set up working directory
 WORKDIR /var/www/html
 
 # Expose the necessary ports
-EXPOSE 80
+EXPOSE 3003
 
-# Run supervisord to manage both PHP-FPM and Nginx
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Start both PHP and Nginx together using supervisord
+CMD ["php-fpm", "-D"] && nginx -g 'daemon off;'
