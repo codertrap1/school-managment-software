@@ -26,7 +26,6 @@ RUN wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-
 
 # Configure Nginx
 COPY default.conf /etc/nginx/conf.d/
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Supervisor configuration
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
