@@ -29,7 +29,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 
 # Expose the necessary ports
-EXPOSE 3003
+EXPOSE 80
 
 # Start both PHP and Nginx together using supervisord
 CMD ["php-fpm", "-D"] && nginx -g 'daemon off;'
